@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <title>Dynamic Table</title>
+</head>
+<body>
+    <div class="table container">
+        <h1 class="table__heading">Dynamic Table</h1>
+        <table class="table table-striped">
+
+            <thead>
+                <tr>
+                    <td>User Id</td>
+                    <td>Title</td>
+                    <td>Completed</td>
+                </tr>
+            </thead>
+            <tbody class="table__body">
+               
+            </tbody>
+        </table>
+    </div>
+    <script>
+    $(document).ready(function(){
+    $.ajax({url : "https://jsonplaceholder.typicode.com/todos", success: function(result){
+           // $("#data").html(result);
+            rowData(result);
+            console.log(result);
+    
+        }})
+
+    
+    function rowData(result){
+        for(var i=0; i < result.length; i++){
+            rowTable(result[i]);
+            console.log(rowTable(result[i]))
+        }
+    }
+    function rowTable(row){
+        var rows = $("<tr/>");
+        $(".table__body").append(rows);
+        rows.append("<td>" + row.id + "</td>");
+        rows.append("<td>" + row.title + "</td>");
+        rows.append("<td>" + row.completed + "</td>");
+
+    }
+})
+    </script>
+</body>
+</html>
